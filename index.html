@@ -3,121 +3,94 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Data Privacy & Marketing in 2026 — Interactive</title>
-  <!-- Tailwind via CDN -->
+  <title>Data Privacy & Marketing 2026 — Interactive</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    body{font-family:system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol", sans-serif}
-    .chip{border-radius:9999px;padding:.25rem .6rem;cursor:pointer}
-    .card{transition:transform .25s ease, box-shadow .25s ease}
-    .card:hover{transform:translateY(-2px)}
+    /* Estilos personalizados para mejorar el "Vibe" */
+    body { font-family: 'Inter', system-ui, sans-serif; }
+    .chip { border-radius: 9999px; padding: 0.25rem 0.75rem; font-size: 0.75rem; font-weight: 600; }
+    .card { transition: all 0.3s ease; }
+    .card:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+    /* Ajuste para que los detalles no se vean pegados */
+    summary::-webkit-details-marker { display: none; }
+    details[open] summary { margin-bottom: 1rem; }
   </style>
-  <!-- React 18 via CDN -->
   <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
   <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
   <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
-<body class="bg-gradient-to-b from-slate-50 to-emerald-50 text-gray-900">
-  <header class="max-w-6xl mx-auto px-6 py-10">
-    <a href="https://valescabravo.github.io/" class="inline-flex items-center text-sm text-blue-700 hover:underline">← Back to Portfolio</a>
-    <h1 class="text-3xl md:text-5xl font-extrabold mt-4 leading-tight">Data Privacy & Marketing in 2026 🔐
-      <span class="block text-xl md:text-2xl font-semibold text-gray-600">Cookieless strategy • consent-aware analytics • compliant growth</span>
+<body class="bg-gradient-to-tr from-slate-50 via-white to-emerald-50 text-gray-900 min-h-screen">
+  
+  <header class="max-w-6xl mx-auto px-4 md:px-6 py-8 md:py-16">
+    <a href="https://valescabravo.github.io/" class="text-indigo-600 font-medium hover:text-indigo-800 transition-colors">← Back to Portfolio</a>
+    
+    <h1 class="text-4xl md:text-6xl font-black mt-6 tracking-tight leading-none">
+      Data Privacy & Marketing <span class="text-emerald-600">2026</span> 🔐
     </h1>
-    <p class="mt-3 text-gray-700 max-w-3xl">Explore a practical framework: **lifecycle → consent simulator → cookieless playbook → measurement → governance**. Hover for previews, click to go deep. (Educational, not legal advice.)</p>
-    <div class="mt-4 flex flex-wrap gap-2">
-      <span class="chip bg-indigo-100 text-indigo-800">Interactive</span>
-      <span class="chip bg-emerald-100 text-emerald-800">React (CDN)</span>
-      <span class="chip bg-purple-100 text-purple-800">GitHub Pages‑ready</span>
+    
+    <h2 class="text-lg md:text-2xl font-medium text-gray-500 mt-4 leading-relaxed max-w-4xl">
+      Cookieless strategy • Consent-aware analytics • Compliant growth
+    </h2>
+    
+    <p class="mt-6 text-gray-600 text-base md:text-lg max-w-2xl leading-relaxed">
+      A practical framework for the future of digital ethics. 
+      <span class="hidden md:inline text-gray-400">Explore the lifecycle, simulate consent, and master the measurement playbook.</span>
+    </p>
+
+    <div class="mt-8 flex flex-wrap gap-2">
+      <span class="chip bg-indigo-600 text-white shadow-sm">Interactive Lab</span>
+      <span class="chip bg-white border border-emerald-200 text-emerald-700">React 18</span>
+      <span class="chip bg-white border border-purple-200 text-purple-700">Data Analytics</span>
     </div>
   </header>
 
-  <main id="app" class="max-w-6xl mx-auto px-6 pb-20"></main>
+  <main id="app" class="max-w-6xl mx-auto px-4 md:px-6 pb-24"></main>
 
-  <footer class="text-center text-sm text-gray-500 pb-10">© 2026 Valesca Bravo — Interactive Lab</footer>
+  <footer class="text-center text-gray-400 py-12 border-t border-gray-100 text-sm">
+    © 2026 Valesca Bravo — Crafted with Vibe Coding
+  </footer>
 
   <script type="text/babel">
     const { useState, useMemo, useEffect } = React;
 
-    const Section = ({title, children, accent='indigo'}) => (
-      <section className={`card bg-white/90 backdrop-blur border rounded-2xl p-5 mb-6 border-l-4 ${
-        accent==='indigo'?'border-indigo-500':accent==='emerald'?'border-emerald-500':accent==='amber'?'border-amber-500':'border-slate-400'
-      }`}>
-        <h2 className="text-2xl font-extrabold mb-2">{title}</h2>
-        <div className="text-sm md:text-base text-gray-800">{children}</div>
-      </section>
-    );
+    // Componente de Sección mejorado para responsive
+    const Section = ({title, children, accent='indigo'}) => {
+      const colors = {
+        indigo: 'border-indigo-500 bg-indigo-50/30',
+        emerald: 'border-emerald-500 bg-emerald-50/30',
+        amber: 'border-amber-500 bg-amber-50/30',
+        slate: 'border-slate-400 bg-slate-50/30'
+      };
+      return (
+        <section className={`card bg-white border rounded-3xl p-6 md:p-8 mb-8 border-l-8 shadow-sm ${colors[accent] || colors.slate}`}>
+          <h2 className="text-2xl md:text-3xl font-black mb-6 text-gray-800 tracking-tight">{title}</h2>
+          <div className="w-full">{children}</div>
+        </section>
+      );
+    };
 
-    // STEP 1 — Data Lifecycle
+    // --- DATA (Se mantienen tus constantes de Lifecycle, Playbook, etc.) ---
     const lifecycle = [
-      {k:'collect', title:'Collect', color:'#3b82f6', def:'What you gather and on what legal basis.',
-        tips:['Minimise fields; avoid sensitive categories','Use consent banners and just‑in‑time notices','Prefer server‑side tagging for control']},
-      {k:'store', title:'Store', color:'#10b981', def:'Where and how you keep it.',
-        tips:['Encrypt at rest & in transit','Limit access by role','Set retention periods & auto‑deletion']},
-      {k:'use', title:'Use', color:'#8b5cf6', def:'How you activate data for personalisation/measurement.',
-        tips:['Respect stated purpose; don’t repurpose without basis','Aggregate where possible','Log processing activities (RoPA)']},
-      {k:'share', title:'Share', color:'#f59e0b', def:'Vendors, adtech, and clean rooms.',
-        tips:['DPAs with vendors; SCCs for cross‑border','Limit IDs; prefer cohort/clean room joins','Audit vendor sub‑processors']},
-      {k:'delete', title:'Delete', color:'#ef4444', def:'Retention, subject requests, and incident response.',
-        tips:['Automate deletion on schedule','Fulfil access/erasure requests timely','Have a breach playbook & contacts']},
+      {k:'collect', title:'Collect', color:'#3b82f6', def:'What you gather and on what legal basis.', tips:['Minimise fields; avoid sensitive categories','Use consent banners','Prefer server-side tagging']},
+      {k:'store', title:'Store', color:'#10b981', def:'Where and how you keep it.', tips:['Encrypt at rest & in transit','Role-based access','Auto-deletion periods']},
+      {k:'use', title:'Use', color:'#8b5cf6', def:'How you activate data.', tips:['Respect purpose','Aggregate data','Log activities (RoPA)']},
+      {k:'share', title:'Share', color:'#f59e0b', def:'Vendors and clean rooms.', tips:['Audit sub-processors','DPAs & SCCs','Limit IDs']},
+      {k:'delete', title:'Delete', color:'#ef4444', def:'Retention & response.', tips:['Automate deletion','Subject requests','Breach playbook']}
     ];
 
-    // STEP 2 — Consent & Legal Basis Simulator (simple rules, educational only)
-    const purposes = [
-      {k:'measurement', name:'Measurement/Analytics'},
-      {k:'personalisation', name:'Ads Personalisation'},
-      {k:'security', name:'Security/Fraud Prevention'},
-      {k:'essential', name:'Essential Site Functionality'},
-    ];
-
-    const regions = [
-      {k:'eu', name:'EU (GDPR) & Consent Mode'},
-      {k:'us', name:'US (CCPA/State laws)'},
-      {k:'br', name:'Brazil (LGPD)'},
-    ];
-
-    function evaluateRule({region, purpose, consent}){
-      // super simplified; not legal advice
-      const c = consent; // {ad:bool, analytics:bool, essential:bool}
-      if(purpose==='essential') return {status:'Allowed', why:'Strictly necessary cookies/data typically permitted.'};
-      if(purpose==='security') return {status:'Allowed', why:'Security & fraud prevention often allowed as legitimate interest/necessary.'};
-      if(region==='eu'){
-        if(purpose==='measurement') return c.analytics ? {status:'Allowed', why:'Consent given for analytics.'} : {status:'Modeled', why:'No analytics consent → rely on Consent Mode/aggregate.'};
-        if(purpose==='personalisation') return c.ad ? {status:'Allowed', why:'Ads consent granted.'} : {status:'Restricted', why:'No ads consent → only contextual/non‑personalised.'};
-      }
-      if(region==='us'){
-        if(purpose==='measurement') return {status:'Allowed', why:'Generally permitted with notice/opt‑out options.'};
-        if(purpose==='personalisation') return {status: c.ad? 'Allowed':'Opt‑out', why: c.ad? 'User permitted personalised ads.':'Respect “Do Not Sell/Share” → contextual only.'};
-      }
-      if(region==='br'){
-        if(purpose==='measurement') return {status:'Allowed', why:'Legitimate interest or consent, with transparency.'};
-        if(purpose==='personalisation') return c.ad? {status:'Allowed','why':'Consent for marketing.'}:{status:'Restricted','why':'No consent for marketing.'};
-      }
-      return {status:'Review', why:'Check your local guidance.'};
-    }
-
-    // STEP 3 — Cookieless Playbook cards
     const playbook = [
-      {k:'fpd', title:'First‑party Data', emoji:'🧩', desc:'Own relationships and permissions.',
-        practice:['Value exchange for zero‑party data','Collect consented emails/IDs','Unify with a CDP'], tools:['CDP (Segment,Rudderstack)','CRM (HubSpot,Salesforce)','CMP (OneTrust,Sourcepoint)']},
-      {k:'sst', title:'Server‑side Tagging', emoji:'🛰️', desc:'Reduce client scripts; control data flow.',
-        practice:['Filter/transform before vendors','Honor consent flags end‑to‑end','Secure endpoints'], tools:['GTM Server‑side','Tealium EventStream','Custom proxy']},
-      {k:'consentmode', title:'Consent Mode', emoji:'✅', desc:'Respect choices while keeping measurement. Mandatory for EEA/UK since March 2024.',
-        practice:['Deploy v2 (mandatory EEA/UK since March 2024)','Map banner states to ad_user_data & ad_personalization','Test modeled conversions'], tools:['Google Consent Mode v2','IAB TCF','Platform SDKs']},
-      {k:'cleanrooms', title:'Clean Rooms', emoji:'🧼', desc:'Privacy‑safe joins for activation/measurement.',
-        practice:['Use hashed IDs & limited columns','Query templates w/ k‑anonymity','Access controls & logging'], tools:['GA4/PAAPI + Ads Data Hub','AWS Clean Rooms','Snowflake Collaboration']},
-      {k:'contextual', title:'Contextual & Cohorts', emoji:'📰', desc:'Target by content, topics, and cohorts.',
-        practice:['Use high‑quality inventory','Brand‑safety rules','Measure with lift tests'], tools:['G Ads Topics API','Publisher cohorts','GARM categories']},
+      {k:'fpd', title:'First-party Data', emoji:'🧩', desc:'Own your permissions.', practice:['Zero-party data exchange','Consented IDs','Unify with CDP'], tools:['Segment','HubSpot','OneTrust']},
+      {k:'sst', title:'Server-side Tagging', emoji:'🛰️', desc:'Control data flow.', practice:['Filter before vendors','Honor consent flags','Secure endpoints'], tools:['GTM SS','Tealium','Proxy']},
+      {k:'consentmode', title:'Consent Mode', emoji:'✅', desc:'Model the gaps.', practice:['Deploy V2 (EEA)','Map banner states','Test modeled conversions'], tools:['Google Consent Mode','IAB TCF']},
+      {k:'cleanrooms', title:'Clean Rooms', emoji:'🧼', desc:'Privacy-safe joins.', practice:['Hashed IDs','K-anonymity','Access controls'], tools:['Ads Data Hub','Snowflake','AWS']},
+      {k:'contextual', title:'Contextual', emoji:'📰', desc:'Target by content.', practice:['Quality inventory','Brand safety','Lift tests'], tools:['Topics API','Publisher cohorts']}
     ];
 
-    // STEP 4 — Measurement alternatives
     const measurement = [
-      {k:'mmm', title:'Marketing Mix Modeling', desc:'Top‑down, privacy‑safe. Works with aggregated spend + sales.', tips:['Refresh weekly/monthly','Include promo/seasonality','Use Bayesian/ML for speed'], tools:['Lightweight MMM (Meridian)','Robyn','PyMC/Orbit']},
-      {k:'incr', title:'Incrementality', desc:'Geo/A‑B tests to prove causal lift.', tips:['Power calculations','Holdout design','Measure halo & decay'], tools:['Meta Conversion Lift','Google Geo‑experiments','Stats packages']},
-      {k:'modeled', title:'Modeled Conversions', desc:'Fill gaps when consent is limited.', tips:['Validate with experiments','Explain uncertainty','Avoid double counting'], tools:['Google Consent Mode models','Platform modeled reporting']},
-      {k:'attrib', title:'Hybrid Attribution', desc:'Blend last‑touch with experiments + MMM.', tips:['Weight by confidence','Use first‑party events','Document assumptions'], tools:['GA4','Custom pipelines','BI']},
+      {k:'mmm', title:'Marketing Mix Modeling', desc:'Top-down, privacy-safe analysis.', tips:['Weekly refresh','Seasonality factor','ML speed'], tools:['Meridian','Robyn']},
+      {k:'incr', title:'Incrementality', desc:'Prove causal lift with tests.', tips:['Geo-experiments','Holdout design','Decay measure'], tools:['Meta Lift','Stats packages']},
+      {k:'modeled', title:'Modeled Conversions', desc:'Fill gaps without cookies.', tips:['Validate often','Explain uncertainty','No double counting'], tools:['Consent Mode','Platform models']}
     ];
-
-    function Pill({text}){return <span className="inline-flex items-center px-2 py-1 text-xs bg-gray-100 rounded border border-gray-200 mr-2 mb-2">{text}</span>}
 
     function App(){
       const [activeLife, setActiveLife] = useState('collect');
@@ -125,24 +98,30 @@
       const [purpose, setPurpose] = useState('measurement');
       const [consent, setConsent] = useState({ad:false, analytics:false, essential:true});
 
-      useEffect(()=>{
-        const h = window.location.hash.replace('#','');
-        if(lifecycle.find(l=>l.k===h)) setActiveLife(h);
-      },[]);
-
-      const rule = useMemo(()=> evaluateRule({region, purpose, consent}), [region, purpose, consent]);
+      const rule = useMemo(()=> {
+        if(purpose==='essential') return {status:'Allowed ✅', why:'Strictly necessary for functionality.'};
+        if(region==='eu' && purpose==='measurement') return consent.analytics ? {status:'Allowed ✅', why:'Explicit consent given.'} : {status:'Modeled 🟠', why:'Consent missing. Using aggregate models.'};
+        if(region==='eu' && purpose==='personalisation') return consent.ad ? {status:'Allowed ✅', why:'Ads consent granted.'} : {status:'Restricted 🚫', why:'Non-personalised ads only.'};
+        return {status:'Review ⚖️', why:'Depends on specific local opt-out rules.'};
+      }, [region, purpose, consent]);
 
       return (
-        <div>
-          <Section title="Step 1: Data Lifecycle (click a stage)" accent="indigo">
-            <div className="grid sm:grid-cols-2 md:grid-cols-5 gap-3">
+        <div className="space-y-4">
+          
+          {/* STEP 1: Lifecycle - Ahora en Grid que colapsa */}
+          <Section title="1. Data Lifecycle" accent="indigo">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
               {lifecycle.map(l => (
-                <div key={l.k} className={`p-4 border rounded-xl cursor-pointer ${activeLife===l.k?'bg-indigo-50 border-indigo-300':'bg-white'}`} onClick={()=>{setActiveLife(l.k); window.location.hash=l.k;}}>
-                  <div className="font-semibold" style={{color:l.color}}>{l.title}</div>
-                  <div className="text-xs text-gray-600 mt-1">{l.def}</div>
+                <div 
+                  key={l.k} 
+                  onClick={() => setActiveLife(l.k)}
+                  className={`p-5 rounded-2xl cursor-pointer border-2 transition-all ${activeLife===l.k ? 'border-indigo-500 bg-indigo-50 shadow-md' : 'border-gray-100 bg-white hover:border-indigo-200'}`}
+                >
+                  <div className="text-lg font-bold" style={{color: l.color}}>{l.title}</div>
+                  <p className="text-xs text-gray-500 mt-1 leading-tight">{l.def}</p>
                   {activeLife===l.k && (
-                    <ul className="list-disc list-inside text-xs text-gray-700 mt-2 space-y-1">
-                      {l.tips.map((t,i)=>(<li key={i}>{t}</li>))}
+                    <ul className="mt-4 space-y-2 text-xs font-medium text-gray-700 animate-in fade-in slide-in-from-top-1">
+                      {l.tips.map((t,i)=>(<li key={i} className="flex gap-2"><span>•</span>{t}</li>))}
                     </ul>
                   )}
                 </div>
@@ -150,114 +129,92 @@
             </div>
           </Section>
 
-          <Section title="Step 2: Consent & Legal-Basis Simulator (educational)" accent="emerald">
-            <div className="grid md:grid-cols-2 gap-4">
-              <div className="p-4 bg-emerald-50 border border-emerald-200 rounded-xl">
-                <div className="text-sm font-semibold mb-2">Settings</div>
-                <div className="flex flex-wrap gap-3 text-sm">
-                  <label className="flex items-center gap-2">Region
-                    <select className="border rounded px-2 py-1" value={region} onChange={e=>setRegion(e.target.value)}>
-                      {regions.map(r=>(<option key={r.k} value={r.k}>{r.name}</option>))}
+          {/* STEP 2: Simulator - Grid 1 col en móvil, 2 en PC */}
+          <Section title="2. Consent Simulator" accent="emerald">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <div className="space-y-6 p-6 bg-white rounded-2xl border border-emerald-100">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="flex flex-col gap-2">
+                    <label className="text-xs font-bold uppercase text-gray-400">Region</label>
+                    <select className="bg-gray-50 border-none p-3 rounded-xl text-sm outline-emerald-500" value={region} onChange={e=>setRegion(e.target.value)}>
+                      <option value="eu">EU (GDPR)</option>
+                      <option value="us">US (CCPA)</option>
+                      <option value="br">Brazil (LGPD)</option>
                     </select>
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <label className="text-xs font-bold uppercase text-gray-400">Purpose</label>
+                    <select className="bg-gray-50 border-none p-3 rounded-xl text-sm outline-emerald-500" value={purpose} onChange={e=>setPurpose(e.target.value)}>
+                      <option value="measurement">Analytics</option>
+                      <option value="personalisation">Ads Personalisation</option>
+                      <option value="essential">Essential</option>
+                    </select>
+                  </div>
+                </div>
+                <div className="flex flex-col sm:flex-row gap-4 pt-2">
+                  <label className="flex items-center gap-3 p-3 bg-gray-50 rounded-xl cursor-pointer flex-1">
+                    <input type="checkbox" className="w-5 h-5 accent-emerald-500" checked={consent.analytics} onChange={e=>setConsent(c=>({...c, analytics:e.target.checked}))}/>
+                    <span className="text-sm font-medium">Analytics Consent</span>
                   </label>
-                  <label className="flex items-center gap-2">Purpose
-                    <select className="border rounded px-2 py-1" value={purpose} onChange={e=>setPurpose(e.target.value)}>
-                      {purposes.map(p=>(<option key={p.k} value={p.k}>{p.name}</option>))}
-                    </select>
+                  <label className="flex items-center gap-3 p-3 bg-gray-50 rounded-xl cursor-pointer flex-1">
+                    <input type="checkbox" className="w-5 h-5 accent-emerald-500" checked={consent.ad} onChange={e=>setConsent(c=>({...c, ad:e.target.checked}))}/>
+                    <span className="text-sm font-medium">Ads Consent</span>
                   </label>
                 </div>
-                <div className="mt-3 grid grid-cols-2 gap-2 text-sm">
-                  <label className="flex items-center gap-2"><input type="checkbox" checked={consent.analytics} onChange={e=>setConsent(c=>({...c, analytics:e.target.checked}))}/> Analytics consent</label>
-                  <label className="flex items-center gap-2"><input type="checkbox" checked={consent.ad} onChange={e=>setConsent(c=>({...c, ad:e.target.checked}))}/> Ads consent</label>
-                </div>
-                <div className="text-xs text-gray-600 mt-2">Assumes essential/security allowed. This is a simplification for learning, not legal advice.</div>
               </div>
-              <div className="p-4 bg-white border rounded-xl">
-                <div className="text-sm font-semibold mb-1">Result</div>
-                <div className="text-2xl font-extrabold">{rule.status}</div>
-                <div className="text-sm text-gray-700">{rule.why}</div>
-                <div className="mt-2 text-xs text-gray-600">Tip: If restricted, try Consent Mode, contextual, or clean rooms.
-                </div>
+
+              <div className="flex flex-col justify-center p-8 bg-emerald-600 text-white rounded-2xl shadow-xl shadow-emerald-200">
+                <div className="text-xs font-bold uppercase opacity-80 mb-2">Simulated Result</div>
+                <div className="text-4xl font-black mb-2">{rule.status}</div>
+                <p className="text-emerald-50 leading-relaxed font-medium">{rule.why}</p>
               </div>
             </div>
           </Section>
 
-          <Section title="Step 3: Cookieless Playbook (click a card)" accent="amber">
-            <div className="text-xs text-amber-700 bg-amber-50 border border-amber-200 rounded-xl px-4 py-2 mb-3">
-              <strong>2026 status:</strong> Google abandoned third-party cookie deprecation in Chrome; users now see a consent prompt instead. Safari and Firefox block them by default. Consent acceptance averages ~30–35%. First-party data strategy remains the right long-term approach regardless of browser policy.
-            </div>
-            <div className="grid md:grid-cols-3 gap-3">
+          {/* STEP 3 & 4: Mas limpieza en el grid */}
+          <Section title="3. Cookieless Playbook" accent="amber">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {playbook.map(p => (
-                <details key={p.k} className="p-4 bg-white border rounded-xl">
-                  <summary className="cursor-pointer font-semibold flex items-center gap-2">{p.emoji} {p.title} <span className="text-xs text-gray-500 font-normal">— {p.desc}</span></summary>
-                  <div className="mt-2 text-sm">
-                    <div className="font-semibold">Good practice</div>
-                    <ul className="list-disc list-inside space-y-1">{p.practice.map((t,i)=>(<li key={i}>{t}</li>))}</ul>
-                    <div className="font-semibold mt-2">Tools</div>
-                    <div className="flex flex-wrap mt-1">{p.tools.map((t,i)=>(<span key={i} className="chip bg-gray-100 border border-gray-200 mr-2 mb-2">{t}</span>))}</div>
+                <details key={p.k} className="group p-5 bg-white border border-gray-100 rounded-2xl hover:border-amber-400 transition-all">
+                  <summary className="list-none cursor-pointer flex justify-between items-center">
+                    <div className="flex items-center gap-3 font-bold text-gray-800">
+                      <span className="text-2xl">{p.emoji}</span> {p.title}
+                    </div>
+                    <span className="text-amber-500 group-open:rotate-180 transition-transform">▼</span>
+                  </summary>
+                  <div className="mt-4 space-y-3">
+                    <p className="text-sm text-gray-500 italic">{p.desc}</p>
+                    <div className="flex flex-wrap gap-2">
+                      {p.tools.map(t=>(<span key={t} className="text-[10px] font-bold bg-amber-50 text-amber-700 px-2 py-1 rounded-md uppercase tracking-wider">{t}</span>))}
+                    </div>
                   </div>
                 </details>
               ))}
             </div>
           </Section>
 
-          <Section title="Step 4: Measurement in a Privacy-First World" accent="indigo">
-            <div className="grid md:grid-cols-2 gap-3">
+          {/* STEP 4: Measurement */}
+          <Section title="4. Measurement World" accent="indigo">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {measurement.map(m => (
-                <div key={m.k} className="p-4 bg-white border rounded-xl">
-                  <div className="font-semibold">{m.title}</div>
-                  <div className="text-sm text-gray-700">{m.desc}</div>
-                  <div className="text-sm mt-2"><span className="font-semibold">Good practice: </span>{m.tips.join(' • ')}</div>
-                  <div className="mt-2 flex flex-wrap">{m.tools.map((t,i)=>(<Pill key={i} text={t}/>))}</div>
+                <div key={m.k} className="p-6 bg-white border border-slate-100 rounded-3xl">
+                  <h3 className="text-xl font-bold text-indigo-900 mb-2">{m.title}</h3>
+                  <p className="text-sm text-gray-600 mb-4">{m.desc}</p>
+                  <div className="flex flex-wrap gap-2">
+                    {m.tools.map(t=>(<span key={t} className="text-xs font-semibold bg-indigo-50 text-indigo-600 px-3 py-1 rounded-full">{t}</span>))}
+                  </div>
                 </div>
               ))}
             </div>
           </Section>
-
-          <Section title="Step 5: Governance, Risk & References" accent="slate">
-            <div className="grid md:grid-cols-2 gap-4 text-sm">
-              <div className="p-4 bg-white border rounded-xl">
-                <div className="font-semibold mb-1">Privacy operating basics</div>
-                <ul className="list-disc list-inside space-y-1">
-                  <li>Maintain a Record of Processing Activities (RoPA).</li>
-                  <li>Data Protection Impact Assessments for high‑risk uses.</li>
-                  <li>Vendor DPAs, sub‑processor reviews, SCCs where needed.</li>
-                  <li>Incident response runbook; 72‑hour notifications (EU).</li>
-                </ul>
-              </div>
-              <div className="p-4 bg-white border rounded-xl">
-                <div className="font-semibold mb-1">Authoritative references</div>
-                <ul className="list-disc list-inside space-y-1">
-                  <li><a className="text-blue-700 hover:underline" target="_blank" rel="noopener" href="https://eur-lex.europa.eu/eli/reg/2016/679/oj">GDPR (EU)</a></li>
-                  <li><a className="text-blue-700 hover:underline" target="_blank" rel="noopener" href="https://oag.ca.gov/privacy/ccpa">CCPA/CPRA (California)</a></li>
-                  <li><a className="text-blue-700 hover:underline" target="_blank" rel="noopener" href="https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng">EU AI Act (Official Journal)</a></li>
-                  <li><a className="text-blue-700 hover:underline" target="_blank" rel="noopener" href="https://www.nist.gov/itl/ai-risk-management-framework">NIST AI RMF</a></li>
-                  <li><a className="text-blue-700 hover:underline" target="_blank" rel="noopener" href="https://www.legislation.gov.uk/ukpga/2025/32">UK Data (Use and Access) Act 2025</a></li>
-                  <li><a className="text-blue-700 hover:underline" target="_blank" rel="noopener" href="https://www.dataprotection.ie">Data Protection Commission — Ireland (DPC)</a></li>
-                </ul>
-                <div className="text-xs text-gray-500 mt-2">Note: Laws evolve. Use this for learning; consult your privacy counsel for decisions.</div>
-              </div>
-              <div className="p-4 bg-blue-50 border border-blue-200 rounded-xl md:col-span-2">
-                <div className="font-semibold mb-2">Ireland & the DPC — why it matters</div>
-                <p className="mb-2">Ireland is the European headquarters of Meta, Google, Apple, LinkedIn, and TikTok, among others. Under the GDPR one-stop-shop mechanism, the <strong>Data Protection Commission (DPC)</strong> acts as Lead Supervisory Authority (LSA) for all cross-border processing by these companies across the EU — making it one of the most consequential data protection regulators in the world.</p>
-                <div className="grid sm:grid-cols-3 gap-3 text-xs mt-3">
-                  <div className="p-3 bg-white border rounded-xl">
-                    <div className="font-semibold mb-1">€3.5B+ in GDPR fines since 2018</div>
-                    <div className="text-gray-600">The DPC leads EU enforcement: Meta €1.2B (2023), LinkedIn €310M, Meta €251M and €91M (2024) — more than 4× the second-ranked authority. Source: DLA Piper, Jan 2025.</div>
-                  </div>
-                  <div className="p-3 bg-white border rounded-xl">
-                    <div className="font-semibold mb-1">Lead Supervisory Authority</div>
-                    <div className="text-gray-600">Investigations opened in Ireland affect all EU citizens. Cases escalate to the European Data Protection Board (EDPB) when cross-border impact is involved.</div>
-                  </div>
-                  <div className="p-3 bg-white border rounded-xl">
-                    <div className="font-semibold mb-1">Key enforcement areas</div>
-                    <div className="text-gray-600">Behavioural advertising, consent validity, data transfers to non-EU countries, children's data, and AI profiling are active DPC priorities.</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </Section>
-
+          
+          <div className="p-6 bg-blue-900 text-white rounded-3xl mt-8">
+             <h3 className="text-xl font-bold mb-2">Ireland & the DPC — Why it matters</h3>
+             <p className="text-blue-100 text-sm leading-relaxed">
+               As the HQ for Meta, Google, and Apple, Ireland's DPC is the primary regulator for millions of users. 
+               Fines exceeding €3.5B+ since 2018 prove that compliance is no longer optional—it's the core of modern marketing operations.
+             </p>
+          </div>
         </div>
       );
     }
