@@ -1,1 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Data Privacy & Marketing in 2026 — Interactive</title>
+  <!-- Tailwind via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body{font-family:system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol", sans-serif}
+    .chip{border-radius:9999px;padding:.25rem .6rem;cursor:pointer}
+    .card{transition:transform .25s ease, box-shadow .25s ease}
+    .card:hover{transform:translateY(-2px)}
+  </style>
+  <!-- React 18 via CDN -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body class="bg-gradient-to-b from-slate-50 to-emerald-50 text-gray-900">
+  <header class="max-w-6xl mx-auto px-6 py-10">
+    <a href="https://valescabravo.github.io/" class="inline-flex items-center text-sm text-blue-700 hover:underline">← Back to Portfolio</a>
+    <h1 class="text-3xl md:text-5xl font-extrabold mt-4 leading-tight">Data Privacy & Marketing in 2026 🔐
+      <span class="block text-xl md:text-2xl font-semibold text-gray-600">Cookieless strategy • consent-aware analytics • compliant growth</span>
+    </h1>
+    <p class="mt-3 text-gray-700 max-w-3xl">Explore a practical framework: **lifecycle → consent simulator → cookieless playbook → measurement → governance**. Hover for previews, click to go deep. (Educational, not legal advice.)</p>
+    <div class="mt-4 flex flex-wrap gap-2">
+      <span class="chip bg-indigo-100 text-indigo-800">Interactive</span>
+      <span class="chip bg-emerald-100 text-emerald-800">React (CDN)</span>
+      <span class="chip bg-purple-100 text-purple-800">GitHub Pages‑ready</span>
+    </div>
+  </header>
 
+  <main id="app" class="max-w-6xl mx-auto px-6 pb-20"></main>
+
+  <footer class="text-center text-sm text-gray-500 pb-10">© 2026 Valesca Bravo — Interactive Lab</footer>
+
+  <script type="text/babel">
+    const { useState, useMemo, useEffect } = React;
+
+    const Section = ({title, children, accent='indigo'}) => (
+      <section className={`card bg-white/90 backdrop-blur border rounded-2xl p-5 mb-6 border-l-4 ${
+        accent==='indigo'?'border-indigo-500':accent==='emerald'?'border-emerald-500':accent==='amber'?'border-amber-500':'border-slate-400'
+      }`}>
+        <h2 className="text-2xl font-extrabold mb-2">{title}</h2>
+        <div className="text-sm md:text-base text-gray-800">{children}</div>
+      </section>
+    );
+
+    // STEP 1 — Data Lifecycle
+    const lifecycle = [
+      {k:'collect', title:'Collect', color:'#3b82f6', def:'What you gather and on what legal basis.',
+        tips:['Minimise fields; avoid sensitive categories','Use consent banners and just‑in‑time notices','Prefer server‑side tagging for control']},
+      {k:'store', title:'Store', color:'#10b981', def:'Where and how you keep it.',
+        tips:['Encrypt at rest & in transit','Limit access by role','Set retention periods & auto‑deletion']},
+      {k:'use', title:'Use', color:'#8b5cf6', def:'How you activate data for personalisation/measurement.',
+        tips:['Respect stated purpose; don’t repurpose without basis','Aggregate where possible','Log processing activities (RoPA)']},
+      {k:'share', title:'Share', color:'#f59e0b', def:'Vendors, adtech, and clean rooms.',
+        tips:['DPAs with vendors; SCCs for cross‑border','Limit IDs; prefer cohort/clean room joins','Audit vendor sub‑processors']},
+      {k:'delete', title:'Delete', color:'#ef4444', def:'Retention, subject requests, and incident response.',
+        tips:['Automate deletion on schedule','Fulfil access/erasure requests timely','Have a breach playbook & contacts']},
+    ];
+
+    // STEP 2 — Consent & Legal Basis Simulator (simple rules, educational only)
+    const purposes = [
+      {k:'measurement', name:'Measurement/Analytics'},
+      {k:'personalisation', name:'Ads Personalisation'},
+      {k:'security', name:'Security/Fraud Prevention'},
+      {k:'essential', name:'Essential Site Functionality'},
+    ];
+
+    const regions = [
+      {k:'eu', name:'EU (GDPR) & Consent Mode'},
+      {k:'us', name:'US (CCPA/State laws)'},
+      {k:'br', name:'Brazil (LGPD)'},
+    ];
+
+    function evaluateRule({region, purpose, consent}){
+      // super simplified; not legal advice
+      const c = consent; // {ad:bool, analytics:bool, essential:bool}
+      if(purpose==='essential') return {status:'Allowed', why:'Strictly necessary cookies/data typically permitted.'};
+      if(purpose==='security') return {status:'Allowed', why:'Security & fraud prevention often allowed as legitimate interest/necessary.'};
+      if(region==='eu'){
+        if(purpose==='measurement') return c.analytics ? {status:'Allowed', why:'Consent given for analytics.'} : {status:'Modeled', why:'No analytics consent → rely on Consent Mode/aggregate.'};
+        if(purpose==='personalisation') return c.ad ? {status:'Allowed', why:'Ads consent granted.'} : {status:'Restricted', why:'No ads consent → only contextual/non‑personalised.'};
+      }
+      if(region==='us'){
+        if(purpose==='measurement') return {status:'Allowed', why:'Generally permitted with notice/opt‑out options.'};
+        if(purpose==='personalisation') return {status: c.ad? 'Allowed':'Opt‑out', why: c.ad? 'User permitted personalised ads.':'Respect “Do Not Sell/Share” → contextual only.'};
+      }
+      if(region==='br'){
+        if(purpose==='measurement') return {status:'Allowed', why:'Legitimate interest or consent, with transparency.'};
+        if(purpose==='personalisation') return c.ad? {status:'Allowed','why':'Consent for marketing.'}:{status:'Restricted','why':'No consent for marketing.'};
+      }
+      return {status:'Review', why:'Check your local guidance.'};
+    }
+
+    // STEP 3 — Cookieless Playbook cards
+    const playbook = [
+      {k:'fpd', title:'First‑party Data', emoji:'🧩', desc:'Own relationships and permissions.',
+        practice:['Value exchange for zero‑party data','Collect consented emails/IDs','Unify with a CDP'], tools:['CDP (Segment,Rudderstack)','CRM (HubSpot,Salesforce)','CMP (OneTrust,Sourcepoint)']},
+      {k:'sst', title:'Server‑side Tagging', emoji:'🛰️', desc:'Reduce client scripts; control data flow.',
+        practice:['Filter/transform before vendors','Honor consent flags end‑to‑end','Secure endpoints'], tools:['GTM Server‑side','Tealium EventStream','Custom proxy']},
+      {k:'consentmode', title:'Consent Mode', emoji:'✅', desc:'Respect choices while keeping measurement. Mandatory for EEA/UK since March 2024.',
+        practice:['Deploy v2 (mandatory EEA/UK since March 2024)','Map banner states to ad_user_data & ad_personalization','Test modeled conversions'], tools:['Google Consent Mode v2','IAB TCF','Platform SDKs']},
+      {k:'cleanrooms', title:'Clean Rooms', emoji:'🧼', desc:'Privacy‑safe joins for activation/measurement.',
+        practice:['Use hashed IDs & limited columns','Query templates w/ k‑anonymity','Access controls & logging'], tools:['GA4/PAAPI + Ads Data Hub','AWS Clean Rooms','Snowflake Collaboration']},
+      {k:'contextual', title:'Contextual & Cohorts', emoji:'📰', desc:'Target by content, topics, and cohorts.',
+        practice:['Use high‑quality inventory','Brand‑safety rules','Measure with lift tests'], tools:['G Ads Topics API','Publisher cohorts','GARM categories']},
+    ];
+
+    // STEP 4 — Measurement alternatives
+    const measurement = [
+      {k:'mmm', title:'Marketing Mix Modeling', desc:'Top‑down, privacy‑safe. Works with aggregated spend + sales.', tips:['Refresh weekly/monthly','Include promo/seasonality','Use Bayesian/ML for speed'], tools:['Lightweight MMM (Meridian)','Robyn','PyMC/Orbit']},
+      {k:'incr', title:'Incrementality', desc:'Geo/A‑B tests to prove causal lift.', tips:['Power calculations','Holdout design','Measure halo & decay'], tools:['Meta Conversion Lift','Google Geo‑experiments','Stats packages']},
+      {k:'modeled', title:'Modeled Conversions', desc:'Fill gaps when consent is limited.', tips:['Validate with experiments','Explain uncertainty','Avoid double counting'], tools:['Google Consent Mode models','Platform modeled reporting']},
+      {k:'attrib', title:'Hybrid Attribution', desc:'Blend last‑touch with experiments + MMM.', tips:['Weight by confidence','Use first‑party events','Document assumptions'], tools:['GA4','Custom pipelines','BI']},
+    ];
+
+    function Pill({text}){return <span className="inline-flex items-center px-2 py-1 text-xs bg-gray-100 rounded border border-gray-200 mr-2 mb-2">{text}</span>}
+
+    function App(){
+      const [activeLife, setActiveLife] = useState('collect');
+      const [region, setRegion] = useState('eu');
+      const [purpose, setPurpose] = useState('measurement');
+      const [consent, setConsent] = useState({ad:false, analytics:false, essential:true});
+
+      useEffect(()=>{
+        const h = window.location.hash.replace('#','');
+        if(lifecycle.find(l=>l.k===h)) setActiveLife(h);
+      },[]);
+
+      const rule = useMemo(()=> evaluateRule({region, purpose, consent}), [region, purpose, consent]);
+
+      return (
+        <div>
+          <Section title="Step 1: Data Lifecycle (click a stage)" accent="indigo">
+            <div className="grid sm:grid-cols-2 md:grid-cols-5 gap-3">
+              {lifecycle.map(l => (
+                <div key={l.k} className={`p-4 border rounded-xl cursor-pointer ${activeLife===l.k?'bg-indigo-50 border-indigo-300':'bg-white'}`} onClick={()=>{setActiveLife(l.k); window.location.hash=l.k;}}>
+                  <div className="font-semibold" style={{color:l.color}}>{l.title}</div>
+                  <div className="text-xs text-gray-600 mt-1">{l.def}</div>
+                  {activeLife===l.k && (
+                    <ul className="list-disc list-inside text-xs text-gray-700 mt-2 space-y-1">
+                      {l.tips.map((t,i)=>(<li key={i}>{t}</li>))}
+                    </ul>
+                  )}
+                </div>
+              ))}
+            </div>
+          </Section>
+
+          <Section title="Step 2: Consent & Legal-Basis Simulator (educational)" accent="emerald">
+            <div className="grid md:grid-cols-2 gap-4">
+              <div className="p-4 bg-emerald-50 border border-emerald-200 rounded-xl">
+                <div className="text-sm font-semibold mb-2">Settings</div>
+                <div className="flex flex-wrap gap-3 text-sm">
+                  <label className="flex items-center gap-2">Region
+                    <select className="border rounded px-2 py-1" value={region} onChange={e=>setRegion(e.target.value)}>
+                      {regions.map(r=>(<option key={r.k} value={r.k}>{r.name}</option>))}
+                    </select>
+                  </label>
+                  <label className="flex items-center gap-2">Purpose
+                    <select className="border rounded px-2 py-1" value={purpose} onChange={e=>setPurpose(e.target.value)}>
+                      {purposes.map(p=>(<option key={p.k} value={p.k}>{p.name}</option>))}
+                    </select>
+                  </label>
+                </div>
+                <div className="mt-3 grid grid-cols-2 gap-2 text-sm">
+                  <label className="flex items-center gap-2"><input type="checkbox" checked={consent.analytics} onChange={e=>setConsent(c=>({...c, analytics:e.target.checked}))}/> Analytics consent</label>
+                  <label className="flex items-center gap-2"><input type="checkbox" checked={consent.ad} onChange={e=>setConsent(c=>({...c, ad:e.target.checked}))}/> Ads consent</label>
+                </div>
+                <div className="text-xs text-gray-600 mt-2">Assumes essential/security allowed. This is a simplification for learning, not legal advice.</div>
+              </div>
+              <div className="p-4 bg-white border rounded-xl">
+                <div className="text-sm font-semibold mb-1">Result</div>
+                <div className="text-2xl font-extrabold">{rule.status}</div>
+                <div className="text-sm text-gray-700">{rule.why}</div>
+                <div className="mt-2 text-xs text-gray-600">Tip: If restricted, try Consent Mode, contextual, or clean rooms.
+                </div>
+              </div>
+            </div>
+          </Section>
+
+          <Section title="Step 3: Cookieless Playbook (click a card)" accent="amber">
+            <div className="text-xs text-amber-700 bg-amber-50 border border-amber-200 rounded-xl px-4 py-2 mb-3">
+              <strong>2026 status:</strong> Google abandoned third-party cookie deprecation in Chrome; users now see a consent prompt instead. Safari and Firefox block them by default. Consent acceptance averages ~30–35%. First-party data strategy remains the right long-term approach regardless of browser policy.
+            </div>
+            <div className="grid md:grid-cols-3 gap-3">
+              {playbook.map(p => (
+                <details key={p.k} className="p-4 bg-white border rounded-xl">
+                  <summary className="cursor-pointer font-semibold flex items-center gap-2">{p.emoji} {p.title} <span className="text-xs text-gray-500 font-normal">— {p.desc}</span></summary>
+                  <div className="mt-2 text-sm">
+                    <div className="font-semibold">Good practice</div>
+                    <ul className="list-disc list-inside space-y-1">{p.practice.map((t,i)=>(<li key={i}>{t}</li>))}</ul>
+                    <div className="font-semibold mt-2">Tools</div>
+                    <div className="flex flex-wrap mt-1">{p.tools.map((t,i)=>(<span key={i} className="chip bg-gray-100 border border-gray-200 mr-2 mb-2">{t}</span>))}</div>
+                  </div>
+                </details>
+              ))}
+            </div>
+          </Section>
+
+          <Section title="Step 4: Measurement in a Privacy-First World" accent="indigo">
+            <div className="grid md:grid-cols-2 gap-3">
+              {measurement.map(m => (
+                <div key={m.k} className="p-4 bg-white border rounded-xl">
+                  <div className="font-semibold">{m.title}</div>
+                  <div className="text-sm text-gray-700">{m.desc}</div>
+                  <div className="text-sm mt-2"><span className="font-semibold">Good practice: </span>{m.tips.join(' • ')}</div>
+                  <div className="mt-2 flex flex-wrap">{m.tools.map((t,i)=>(<Pill key={i} text={t}/>))}</div>
+                </div>
+              ))}
+            </div>
+          </Section>
+
+          <Section title="Step 5: Governance, Risk & References" accent="slate">
+            <div className="grid md:grid-cols-2 gap-4 text-sm">
+              <div className="p-4 bg-white border rounded-xl">
+                <div className="font-semibold mb-1">Privacy operating basics</div>
+                <ul className="list-disc list-inside space-y-1">
+                  <li>Maintain a Record of Processing Activities (RoPA).</li>
+                  <li>Data Protection Impact Assessments for high‑risk uses.</li>
+                  <li>Vendor DPAs, sub‑processor reviews, SCCs where needed.</li>
+                  <li>Incident response runbook; 72‑hour notifications (EU).</li>
+                </ul>
+              </div>
+              <div className="p-4 bg-white border rounded-xl">
+                <div className="font-semibold mb-1">Authoritative references</div>
+                <ul className="list-disc list-inside space-y-1">
+                  <li><a className="text-blue-700 hover:underline" target="_blank" rel="noopener" href="https://eur-lex.europa.eu/eli/reg/2016/679/oj">GDPR (EU)</a></li>
+                  <li><a className="text-blue-700 hover:underline" target="_blank" rel="noopener" href="https://oag.ca.gov/privacy/ccpa">CCPA/CPRA (California)</a></li>
+                  <li><a className="text-blue-700 hover:underline" target="_blank" rel="noopener" href="https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng">EU AI Act (Official Journal)</a></li>
+                  <li><a className="text-blue-700 hover:underline" target="_blank" rel="noopener" href="https://www.nist.gov/itl/ai-risk-management-framework">NIST AI RMF</a></li>
+                  <li><a className="text-blue-700 hover:underline" target="_blank" rel="noopener" href="https://www.legislation.gov.uk/ukpga/2025/32">UK Data (Use and Access) Act 2025</a></li>
+                  <li><a className="text-blue-700 hover:underline" target="_blank" rel="noopener" href="https://www.dataprotection.ie">Data Protection Commission — Ireland (DPC)</a></li>
+                </ul>
+                <div className="text-xs text-gray-500 mt-2">Note: Laws evolve. Use this for learning; consult your privacy counsel for decisions.</div>
+              </div>
+              <div className="p-4 bg-blue-50 border border-blue-200 rounded-xl md:col-span-2">
+                <div className="font-semibold mb-2">Ireland & the DPC — why it matters</div>
+                <p className="mb-2">Ireland is the European headquarters of Meta, Google, Apple, LinkedIn, and TikTok, among others. Under the GDPR one-stop-shop mechanism, the <strong>Data Protection Commission (DPC)</strong> acts as Lead Supervisory Authority (LSA) for all cross-border processing by these companies across the EU — making it one of the most consequential data protection regulators in the world.</p>
+                <div className="grid sm:grid-cols-3 gap-3 text-xs mt-3">
+                  <div className="p-3 bg-white border rounded-xl">
+                    <div className="font-semibold mb-1">€3.5B+ in GDPR fines since 2018</div>
+                    <div className="text-gray-600">The DPC leads EU enforcement: Meta €1.2B (2023), LinkedIn €310M, Meta €251M and €91M (2024) — more than 4× the second-ranked authority. Source: DLA Piper, Jan 2025.</div>
+                  </div>
+                  <div className="p-3 bg-white border rounded-xl">
+                    <div className="font-semibold mb-1">Lead Supervisory Authority</div>
+                    <div className="text-gray-600">Investigations opened in Ireland affect all EU citizens. Cases escalate to the European Data Protection Board (EDPB) when cross-border impact is involved.</div>
+                  </div>
+                  <div className="p-3 bg-white border rounded-xl">
+                    <div className="font-semibold mb-1">Key enforcement areas</div>
+                    <div className="text-gray-600">Behavioural advertising, consent validity, data transfers to non-EU countries, children's data, and AI profiling are active DPC priorities.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Section>
+
+        </div>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById('app')).render(<App/>);
+  </script>
+</body>
+</html>
