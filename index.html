@@ -1,28 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-KHLN3NSD');</script>
+  <!-- End Google Tag Manager -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Data Privacy & Marketing 2026 — Interactive</title>
+  <meta name="description" content="Interactive guide to Data Privacy & Marketing in 2026. Cookieless strategy, consent-aware analytics, and compliant growth for the Irish/EU market." />
+  <meta property="og:title" content="Data Privacy & Marketing 2026 — Interactive" />
+  <meta property="og:description" content="Interactive guide to Data Privacy & Marketing in 2026. Cookieless strategy, consent-aware analytics, and compliant growth." />
+  <meta property="og:type" content="website" />
+  
   <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- ✅ Stable CDN for React 18 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.development.js" crossorigin></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.9/babel.min.js" crossorigin></script>
+  
   <style>
-    /* Estilos personalizados para mejorar el "Vibe" */
+    /* Custom styles to enhance the "Vibe" */
     body { font-family: 'Inter', system-ui, sans-serif; }
     .chip { border-radius: 9999px; padding: 0.25rem 0.75rem; font-size: 0.75rem; font-weight: 600; }
     .card { transition: all 0.3s ease; }
     .card:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
-    /* Ajuste para que los detalles no se vean pegados */
+    /* Make details not look cramped */
     summary::-webkit-details-marker { display: none; }
     details[open] summary { margin-bottom: 1rem; }
+    
+    /* Smooth fade-in animation */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-in { animation: fadeIn 0.3s ease both; }
+    .fade-in { animation: fadeIn 0.4s ease both; }
+    .delay-1 { animation-delay: 0.05s; }
+    .delay-2 { animation-delay: 0.1s; }
+    .delay-3 { animation-delay: 0.15s; }
   </style>
-  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
-  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-  <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
 <body class="bg-gradient-to-tr from-slate-50 via-white to-emerald-50 text-gray-900 min-h-screen">
   
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KHLN3NSD"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
   <header class="max-w-6xl mx-auto px-4 md:px-6 py-8 md:py-16">
-    <a href="https://valescabravo.github.io/" class="text-indigo-600 font-medium hover:text-indigo-800 transition-colors">← Back to Portfolio</a>
+    <div class="flex flex-wrap items-center gap-4">
+      <a href="https://valescabravo.github.io/" class="text-indigo-600 font-medium hover:text-indigo-800 transition-colors">← Back to Portfolio</a>
+      <span class="text-gray-300">/</span>
+      <a href="https://valescabravo.github.io/lab/" class="text-indigo-600 font-medium hover:text-indigo-800 transition-colors">← Back to the Lab</a>
+    </div>
     
     <h1 class="text-4xl md:text-6xl font-black mt-6 tracking-tight leading-none">
       Data Privacy & Marketing <span class="text-emerald-600">2026</span> 🔐
@@ -47,13 +82,13 @@
   <main id="app" class="max-w-6xl mx-auto px-4 md:px-6 pb-24"></main>
 
   <footer class="text-center text-gray-400 py-12 border-t border-gray-100 text-sm">
-    © 2026 Valesca Bravo — Crafted with Vibe Coding
+    © 2026 Valesca Bravo — Interactive Lab
   </footer>
 
   <script type="text/babel">
     const { useState, useMemo, useEffect } = React;
 
-    // Componente de Sección mejorado para responsive
+    // Enhanced Section component for responsiveness
     const Section = ({title, children, accent='indigo'}) => {
       const colors = {
         indigo: 'border-indigo-500 bg-indigo-50/30',
@@ -62,14 +97,14 @@
         slate: 'border-slate-400 bg-slate-50/30'
       };
       return (
-        <section className={`card bg-white border rounded-3xl p-6 md:p-8 mb-8 border-l-8 shadow-sm ${colors[accent] || colors.slate}`}>
+        <section className={`card bg-white border rounded-3xl p-6 md:p-8 mb-8 border-l-8 shadow-sm fade-in ${colors[accent] || colors.slate}`}>
           <h2 className="text-2xl md:text-3xl font-black mb-6 text-gray-800 tracking-tight">{title}</h2>
           <div className="w-full">{children}</div>
         </section>
       );
     };
 
-    // --- DATA (Se mantienen tus constantes de Lifecycle, Playbook, etc.) ---
+    // --- DATA ---
     const lifecycle = [
       {k:'collect', title:'Collect', color:'#3b82f6', def:'What you gather and on what legal basis.', tips:['Minimise fields; avoid sensitive categories','Use consent banners','Prefer server-side tagging']},
       {k:'store', title:'Store', color:'#10b981', def:'Where and how you keep it.', tips:['Encrypt at rest & in transit','Role-based access','Auto-deletion periods']},
@@ -80,8 +115,8 @@
 
     const playbook = [
       {k:'fpd', title:'First-party Data', emoji:'🧩', desc:'Own your permissions.', practice:['Zero-party data exchange','Consented IDs','Unify with CDP'], tools:['Segment','HubSpot','OneTrust']},
-      {k:'sst', title:'Server-side Tagging', emoji:'🛰️', desc:'Control data flow.', practice:['Filter before vendors','Honor consent flags','Secure endpoints'], tools:['GTM SS','Tealium','Proxy']},
-      {k:'consentmode', title:'Consent Mode', emoji:'✅', desc:'Model the gaps.', practice:['Deploy V2 (EEA)','Map banner states','Test modeled conversions'], tools:['Google Consent Mode','IAB TCF']},
+      {k:'sst', title:'Server-side Tagging', emoji:'🛰️', desc:'Control data flow.', practice:['Filter before vendors','Honour consent flags','Secure endpoints'], tools:['GTM SS','Tealium','Proxy']},
+      {k:'consentmode', title:'Consent Mode', emoji:'✅', desc:'Model the gaps.', practice:['Deploy V2 (EEA)','Map banner states','Test modelled conversions'], tools:['Google Consent Mode','IAB TCF']},
       {k:'cleanrooms', title:'Clean Rooms', emoji:'🧼', desc:'Privacy-safe joins.', practice:['Hashed IDs','K-anonymity','Access controls'], tools:['Ads Data Hub','Snowflake','AWS']},
       {k:'contextual', title:'Contextual', emoji:'📰', desc:'Target by content.', practice:['Quality inventory','Brand safety','Lift tests'], tools:['Topics API','Publisher cohorts']}
     ];
@@ -89,7 +124,7 @@
     const measurement = [
       {k:'mmm', title:'Marketing Mix Modeling', desc:'Top-down, privacy-safe analysis.', tips:['Weekly refresh','Seasonality factor','ML speed'], tools:['Meridian','Robyn']},
       {k:'incr', title:'Incrementality', desc:'Prove causal lift with tests.', tips:['Geo-experiments','Holdout design','Decay measure'], tools:['Meta Lift','Stats packages']},
-      {k:'modeled', title:'Modeled Conversions', desc:'Fill gaps without cookies.', tips:['Validate often','Explain uncertainty','No double counting'], tools:['Consent Mode','Platform models']}
+      {k:'modeled', title:'Modelled Conversions', desc:'Fill gaps without cookies.', tips:['Validate often','Explain uncertainty','No double counting'], tools:['Consent Mode','Platform models']}
     ];
 
     function App(){
@@ -100,7 +135,7 @@
 
       const rule = useMemo(()=> {
         if(purpose==='essential') return {status:'Allowed ✅', why:'Strictly necessary for functionality.'};
-        if(region==='eu' && purpose==='measurement') return consent.analytics ? {status:'Allowed ✅', why:'Explicit consent given.'} : {status:'Modeled 🟠', why:'Consent missing. Using aggregate models.'};
+        if(region==='eu' && purpose==='measurement') return consent.analytics ? {status:'Allowed ✅', why:'Explicit consent given.'} : {status:'Modelled 🟠', why:'Consent missing. Using aggregate models.'};
         if(region==='eu' && purpose==='personalisation') return consent.ad ? {status:'Allowed ✅', why:'Ads consent granted.'} : {status:'Restricted 🚫', why:'Non-personalised ads only.'};
         return {status:'Review ⚖️', why:'Depends on specific local opt-out rules.'};
       }, [region, purpose, consent]);
@@ -108,19 +143,19 @@
       return (
         <div className="space-y-4">
           
-          {/* STEP 1: Lifecycle - Ahora en Grid que colapsa */}
+          {/* STEP 1: Lifecycle - Grid that collapses */}
           <Section title="1. Data Lifecycle" accent="indigo">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-              {lifecycle.map(l => (
+              {lifecycle.map((l, i) => (
                 <div 
                   key={l.k} 
                   onClick={() => setActiveLife(l.k)}
-                  className={`p-5 rounded-2xl cursor-pointer border-2 transition-all ${activeLife===l.k ? 'border-indigo-500 bg-indigo-50 shadow-md' : 'border-gray-100 bg-white hover:border-indigo-200'}`}
+                  className={`p-5 rounded-2xl cursor-pointer border-2 transition-all fade-in delay-${(i%3)+1} ${activeLife===l.k ? 'border-indigo-500 bg-indigo-50 shadow-md' : 'border-gray-100 bg-white hover:border-indigo-200'}`}
                 >
                   <div className="text-lg font-bold" style={{color: l.color}}>{l.title}</div>
                   <p className="text-xs text-gray-500 mt-1 leading-tight">{l.def}</p>
                   {activeLife===l.k && (
-                    <ul className="mt-4 space-y-2 text-xs font-medium text-gray-700 animate-in fade-in slide-in-from-top-1">
+                    <ul className="mt-4 space-y-2 text-xs font-medium text-gray-700 animate-in">
                       {l.tips.map((t,i)=>(<li key={i} className="flex gap-2"><span>•</span>{t}</li>))}
                     </ul>
                   )}
@@ -129,7 +164,7 @@
             </div>
           </Section>
 
-          {/* STEP 2: Simulator - Grid 1 col en móvil, 2 en PC */}
+          {/* STEP 2: Simulator - Grid 1 col on mobile, 2 on desktop */}
           <Section title="2. Consent Simulator" accent="emerald">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <div className="space-y-6 p-6 bg-white rounded-2xl border border-emerald-100">
@@ -171,11 +206,11 @@
             </div>
           </Section>
 
-          {/* STEP 3 & 4: Mas limpieza en el grid */}
+          {/* STEP 3: Cookieless Playbook */}
           <Section title="3. Cookieless Playbook" accent="amber">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {playbook.map(p => (
-                <details key={p.k} className="group p-5 bg-white border border-gray-100 rounded-2xl hover:border-amber-400 transition-all">
+              {playbook.map((p, i) => (
+                <details key={p.k} className={`group p-5 bg-white border border-gray-100 rounded-2xl hover:border-amber-400 transition-all fade-in delay-${(i%3)+1}`}>
                   <summary className="list-none cursor-pointer flex justify-between items-center">
                     <div className="flex items-center gap-3 font-bold text-gray-800">
                       <span className="text-2xl">{p.emoji}</span> {p.title}
@@ -196,8 +231,8 @@
           {/* STEP 4: Measurement */}
           <Section title="4. Measurement World" accent="indigo">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {measurement.map(m => (
-                <div key={m.k} className="p-6 bg-white border border-slate-100 rounded-3xl">
+              {measurement.map((m, i) => (
+                <div key={m.k} className={`p-6 bg-white border border-slate-100 rounded-3xl fade-in delay-${(i%2)+1}`}>
                   <h3 className="text-xl font-bold text-indigo-900 mb-2">{m.title}</h3>
                   <p className="text-sm text-gray-600 mb-4">{m.desc}</p>
                   <div className="flex flex-wrap gap-2">
@@ -208,7 +243,8 @@
             </div>
           </Section>
           
-          <div className="p-6 bg-blue-900 text-white rounded-3xl mt-8">
+          {/* DPC Section */}
+          <div className="p-6 bg-blue-900 text-white rounded-3xl mt-8 fade-in">
              <h3 className="text-xl font-bold mb-2">Ireland & the DPC — Why it matters</h3>
              <p className="text-blue-100 text-sm leading-relaxed">
                As the HQ for Meta, Google, and Apple, Ireland's DPC is the primary regulator for millions of users. 
@@ -219,7 +255,9 @@
       );
     }
 
-    ReactDOM.createRoot(document.getElementById('app')).render(<App/>);
+    // ✅ Correct React 18 rendering
+    const root = ReactDOM.createRoot(document.getElementById('app'));
+    root.render(<App />);
   </script>
 </body>
 </html>
